@@ -6,6 +6,6 @@ data "aws_vpc" "default" {
 }
 
 data "aws_subnet_ids" "subnets" {
-  count = "${var.vpc_id == "" ? 1 : 0}"
+  count  = "${var.vpc_id == "" ? 1 : 0}"
   vpc_id = "${data.aws_vpc.default.id}"
 }

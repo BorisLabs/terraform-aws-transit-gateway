@@ -18,29 +18,29 @@ variable "default_route_table_propagation" {
   default     = "disable"
 }
 
-variable "gateway_description" {
+variable "tgw_gateway_description" {
   description = "Description of the Gateway"
-  default     = "Default Gateway Description"
+  default     = ""
 }
 
-variable "create_transit_gateway" {
+variable "create_tgw" {
   description = "Create a transit gateway or not"
-  default = true
+  default     = true
 }
 
-variable "share_transit_gateway" {
+variable "share_tgw" {
   description = "Share the Gateway using AWS RAM resource"
-  default = false
+  default     = false
 }
 
-variable "transit_gateway_id" {
+variable "tgw_id" {
   description = "Provide a TGW To use"
-  default = ""
+  default     = ""
 }
 
-variable "transit_gateway_arn" {
+variable "tgw_arn" {
   description = "Provide a TGW ARN works in conjunction with share_transit_gateway"
-  default = ""
+  default     = ""
 }
 
 variable "dns_support" {
@@ -48,7 +48,7 @@ variable "dns_support" {
   default     = "enable"
 }
 
-variable "gateway_tags" {
+variable "tgw_tags" {
   description = "Key Value Tags for the EC2 Transit Gateway"
   default     = {}
 
@@ -62,48 +62,55 @@ variable "vpn_ecmp_support" {
 
 variable "attach_to_vpc" {
   description = "Attach the transit gateway to a VPC"
-  default = false
+  default     = false
 }
 
 variable "vpc_id" {
   description = "VPC ID to attach gateway to"
-  default = ""
+  default     = ""
 }
 
 variable "subnet_ids" {
   description = "List of Subnet IDS for Gateway Attachment when attachment is for VPC"
-  default = []
+  default     = []
 
   type = "list"
 }
 
 variable "default_tags" {
   description = "Default Tags which are merged into resource tags"
-  default = {}
+  default     = {}
 
   type = "map"
 }
 
 variable "route_table_tags" {
   description = "Key Value tags for EC2 Transit Gateway Route table"
-  default = {}
+  default     = {}
 
   type = "map"
 }
 
-variable "transit_gateway_route" {
+variable "ram_share_tags" {
+  description = "Tags for RAM Resource Share"
+  default     = {}
+
+  type = "map"
+}
+
+variable "tgw_route" {
   description = "List of CIDR blocks to add to a transit gateway route table"
-  default = []
+  default     = []
 
   type = "list"
 }
 
-variable "transit_gateway_route_table_association" {
+variable "tgw_route_table_association" {
   description = "TGW default Route association"
-  default = true
+  default     = true
 }
 
-variable "transit_gateway_route_table_propagation" {
+variable "tgw_route_table_propagation" {
   description = "TGW Default Route properation"
-  default = true
+  default     = true
 }

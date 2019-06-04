@@ -1,10 +1,10 @@
 provider "aws" {
-  region  = "eu-west-1"
+  region = "eu-west-1"
 }
 
 provider "aws" {
-  alias = "target-account"
-  region = "eu-west-1"
+  alias   = "target-account"
+  region  = "eu-west-1"
   profile = "account-to-share"
 }
 
@@ -13,7 +13,7 @@ module "transit" {
 
   dns_support = "enable"
 
-  gateway_tags = {
+  tgw_tags = {
     Name  = "Tansit"
     Owner = "Cloud"
   }

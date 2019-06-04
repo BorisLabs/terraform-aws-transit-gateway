@@ -5,10 +5,9 @@ resource "aws_ram_resource_share" "this" {
 
   tags = {
     Environment = "Production"
-    Resource = "Transit Gateway"
+    Resource    = "Transit Gateway"
   }
 }
-
 
 provider "aws" {
   region = "eu-west-1"
