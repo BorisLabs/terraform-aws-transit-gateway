@@ -8,13 +8,13 @@ resource "aws_ec2_transit_gateway" "this" {
 
   description = "${var.tgw_gateway_description}"
 
-  amazon_side_asn                 = "${var.amazon_side_asn}"
-  auto_accept_shared_attachments  = "${var.auto_accept_shared_attachments}"
-  default_route_table_association = "${var.default_route_table_association}"
-  default_route_table_propagation = "${var.default_route_table_propagation}"
-  dns_support                     = "${var.dns_support}"
+  amazon_side_asn                 = "${var.tgw_amazon_side_asn}"
+  auto_accept_shared_attachments  = "${var.tgw_auto_accept_shared_attachments}"
+  default_route_table_association = "${var.tgw_default_route_table_association}"
+  default_route_table_propagation = "${var.tgw_default_route_table_propagation}"
+  dns_support                     = "${var.tgw_dns_support}"
 
-  vpn_ecmp_support = "${var.vpn_ecmp_support}"
+  vpn_ecmp_support = "${var.tgw_vpn_ecmp_support}"
   tags             = "${var.tgw_tags}"
 }
 
@@ -66,10 +66,11 @@ resource "aws_ec2_transit_gateway_route" "this" {
 }
 
 resource "aws_ram_resource_share" "this" {
-  name                      = "transit-share"
-  allow_external_principals = false
+  count = "${var.share_tgw ? 1 : 0}"
 
-  tags = "${var.ram_share_tags}"
+  name                      = "${var.ram_share_name}"
+  allow_external_principals = false
+  tags                      = "${var.ram_share_tags}"
 }
 
 resource "aws_ram_resource_association" "this" {

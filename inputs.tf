@@ -1,19 +1,19 @@
-variable "amazon_side_asn" {
+variable "tgw_amazon_side_asn" {
   description = "ASN of AWS Side of a BGP Session"
   default     = "64512"
 }
 
-variable "auto_accept_shared_attachments" {
+variable "tgw_auto_accept_shared_attachments" {
   description = "Whether resource requests are automatically accepted"
   default     = "disable"
 }
 
-variable "default_route_table_association" {
+variable "tgw_default_route_table_association" {
   description = "Whether resource attachments are automatically associated with the default association route table"
   default     = "disable"
 }
 
-variable "default_route_table_propagation" {
+variable "tgw_default_route_table_propagation" {
   description = "Whether resource attachments automatically propagate routes to the default propagation route table"
   default     = "disable"
 }
@@ -43,7 +43,7 @@ variable "tgw_arn" {
   default     = ""
 }
 
-variable "dns_support" {
+variable "tgw_dns_support" {
   description = "Whether DNS support is enabled"
   default     = "enable"
 }
@@ -55,7 +55,7 @@ variable "tgw_tags" {
   type = "map"
 }
 
-variable "vpn_ecmp_support" {
+variable "tgw_vpn_ecmp_support" {
   description = "Whether VPN Equal Cost Multipath protocol is enabled"
   default     = "disable"
 }
@@ -96,6 +96,11 @@ variable "ram_share_tags" {
   default     = {}
 
   type = "map"
+}
+
+variable "ram_share_name" {
+  description = "Name of the RAM Resource Share"
+  default     = ""
 }
 
 variable "tgw_route" {
