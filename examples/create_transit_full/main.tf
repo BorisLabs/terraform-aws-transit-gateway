@@ -1,17 +1,18 @@
 provider "aws" {
-  region = "eu-west-1"
+  region  = "eu-west-1"
+  profile = "test-account-1"
 }
 
 provider "aws" {
   alias   = "target-account"
   region  = "eu-west-1"
-  profile = "account-to-share"
+  profile = "test-account-2"
 }
 
 module "transit" {
   source = "../../"
 
-  dns_support = "enable"
+  tgw_dns_support = "enable"
 
   tgw_tags = {
     Name  = "Tansit"
@@ -25,9 +26,13 @@ module "transit" {
 
   attach_to_vpc = false
 
-  auto_accept_shared_attachments = "enable"
+  tgw_auto_accept_shared_attachments = "enable"
+
+  tgw_route_table_association = false
+  tgw_route_table_propagation = false
 
   providers = {
-    "aws.share" = "aws.target-account"
+    aws.share = aws.target-account
   }
 }
+

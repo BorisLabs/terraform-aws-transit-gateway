@@ -52,7 +52,7 @@ variable "tgw_tags" {
   description = "Key Value Tags for the EC2 Transit Gateway"
   default     = {}
 
-  type = "map"
+  type = map(string)
 }
 
 variable "tgw_vpn_ecmp_support" {
@@ -74,28 +74,28 @@ variable "subnet_ids" {
   description = "List of Subnet IDS for Gateway Attachment when attachment is for VPC"
   default     = []
 
-  type = "list"
+  type = list(string)
 }
 
 variable "default_tags" {
   description = "Default Tags which are merged into resource tags"
   default     = {}
 
-  type = "map"
+  type = map(string)
 }
 
 variable "route_table_tags" {
   description = "Key Value tags for EC2 Transit Gateway Route table"
   default     = {}
 
-  type = "map"
+  type = map(string)
 }
 
 variable "ram_share_tags" {
   description = "Tags for RAM Resource Share"
   default     = {}
 
-  type = "map"
+  type = map(string)
 }
 
 variable "ram_share_name" {
@@ -107,15 +107,15 @@ variable "tgw_route" {
   description = "List of CIDR blocks to add to a transit gateway route table"
   default     = []
 
-  type = "list"
+  type = list(string)
 }
 
 variable "tgw_route_table_association" {
   description = "TGW default Route association"
-  default     = true
+  default     = false
 }
 
 variable "tgw_route_table_propagation" {
   description = "TGW Default Route properation"
-  default     = true
+  default     = false
 }
