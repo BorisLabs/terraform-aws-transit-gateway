@@ -124,3 +124,13 @@ variable "create_tgw_route_table" {
   description = "Whether to create a route table associated with TGW"
   default     = false
 }
+
+variable "use_cross_account_tgw_route_table" {
+  description = "Whether to associate Transit Gateawy Route Table in different account with the VPC Attachment created here"
+  default     = false
+}
+
+variable "cross_account_tgw_route_table_id" {
+  description = "ID of TGW Route Table cross account."
+  default     = ""
+}

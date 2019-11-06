@@ -58,6 +58,24 @@ resource "aws_ec2_transit_gateway_route_table_propagation" "this" {
   depends_on = [aws_ec2_transit_gateway_route_table.this]
 }
 
+resource "aws_ec2_transit_gateway_route_table_association" "this_cross_account" {
+  count = var.attach_to_vpc && !var.create_tgw_route_table && var.use_cross_account_tgw_route_table ? 1 : 0
+
+  provider = aws.tgw_rt_owner
+
+  transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.this[0].id
+  transit_gateway_route_table_id = var.cross_account_tgw_route_table_id
+}
+
+resource "aws_ec2_transit_gateway_route_table_propagation" "this_cross_account" {
+  count = var.attach_to_vpc && !var.create_tgw_route_table && var.use_cross_account_tgw_route_table ? 1 : 0
+
+  provider = aws.tgw_rt_owner
+
+  transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.this[0].id
+  transit_gateway_route_table_id = var.cross_account_tgw_route_table_id
+}
+
 resource "aws_ec2_transit_gateway_route" "this" {
   count = var.create_tgw && var.attach_to_vpc ? length(var.tgw_route) : 0
 
