@@ -20,7 +20,7 @@ resource "aws_ec2_transit_gateway" "this" {
 
 # Creates a gateway route table and associates with the Gateway
 resource "aws_ec2_transit_gateway_route_table" "this" {
-  count = var.create_tgw ? 1 : 0
+  count = var.create_tgw_route_table ? 1 : 0
 
   transit_gateway_id = local.tgw_id
 
@@ -28,7 +28,7 @@ resource "aws_ec2_transit_gateway_route_table" "this" {
 }
 
 resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
-  count = var.attach_to_vpc && var.create_tgw ? 1 : 0
+  count = var.attach_to_vpc ? 1 : 0
 
   vpc_id     = var.vpc_id != "" ? var.vpc_id : data.aws_vpc.default.id
   subnet_ids = var.vpc_id != "" ?  var.subnet_ids : data.aws_subnet_ids.subnets.*[0].ids
@@ -40,7 +40,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 }
 
 resource "aws_ec2_transit_gateway_route_table_association" "this" {
-  count = var.create_tgw && var.attach_to_vpc ? 1 : 0
+  count = var.create_tgw_route_table && var.attach_to_vpc ? 1 : 0
 
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.this[0].id
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.this[0].id
@@ -49,7 +49,7 @@ resource "aws_ec2_transit_gateway_route_table_association" "this" {
 }
 
 resource "aws_ec2_transit_gateway_route_table_propagation" "this" {
-  count = var.create_tgw && var.attach_to_vpc ? 1 : 0
+  count = var.create_tgw_route_table && var.attach_to_vpc ? 1 : 0
 
   transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.this[0].id
 

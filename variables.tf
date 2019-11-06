@@ -119,3 +119,8 @@ variable "tgw_route_table_propagation" {
   description = "TGW Default Route properation"
   default     = false
 }
+
+variable "create_tgw_route_table" {
+  description = "Whether to create a route table associated with TGW"
+  default     = true
+}
