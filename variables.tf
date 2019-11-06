@@ -122,5 +122,5 @@ variable "tgw_route_table_propagation" {
 
 variable "create_tgw_route_table" {
   description = "Whether to create a route table associated with TGW"
-  default     = true
+  default     = false
 }
