@@ -2,7 +2,7 @@ locals {
   tgw_id  = element(concat(aws_ec2_transit_gateway.this.*.id, [var.tgw_id]), 0)
   tgw_arn = element(concat(aws_ec2_transit_gateway.this.*.arn, [var.tgw_arn]), 0)
 
-  tgw_attachment_id = element(concat(aws_ec2_transit_gateway_vpc_attachment.this.*.id, var.tgw_attachment_id), 0)
+  tgw_attachment_id = element(concat(aws_ec2_transit_gateway_vpc_attachment.this.*.id, [var.tgw_attachment_id]), 0)
 }
 
 resource "aws_ec2_transit_gateway" "this" {
