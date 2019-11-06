@@ -134,3 +134,17 @@ variable "cross_account_tgw_route_table_id" {
   description = "ID of TGW Route Table cross account."
   default     = ""
 }
+
+variable "add_tgw_route_table_association" {
+  description = "Whether to associate TGW Route Table with an attachment"
+  default = ""
+}
+variable "add_tgw_route_table_propagation" {
+  description = "Whether to associate TGW Route Table with an attachment"
+  default = ""
+}
+
+variable "tgw_attachment_id" {
+  description = "ID of TGW Attachment to associate or propagate with Route Table"
+  default = ""
+}

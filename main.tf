@@ -1,6 +1,8 @@
 locals {
   tgw_id  = element(concat(aws_ec2_transit_gateway.this.*.id, [var.tgw_id]), 0)
   tgw_arn = element(concat(aws_ec2_transit_gateway.this.*.arn, [var.tgw_arn]), 0)
+
+  tgw_attachment_id = element(concat(aws_ec2_transit_gateway_vpc_attachment.this.*.id, var.tgw_attachment_id), 0)
 }
 
 resource "aws_ec2_transit_gateway" "this" {
@@ -40,18 +42,19 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 }
 
 resource "aws_ec2_transit_gateway_route_table_association" "this" {
-  count = var.create_tgw_route_table && var.attach_to_vpc ? 1 : 0
+  count = var.create_tgw_route_table && (var.attach_to_vpc || var.add_tgw_route_table_association) ? 1 : 0
 
-  transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.this[0].id
+  transit_gateway_attachment_id  = local.tgw_attachment_id
+
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.this[0].id
 
   depends_on = [aws_ec2_transit_gateway_vpc_attachment.this]
 }
 
 resource "aws_ec2_transit_gateway_route_table_propagation" "this" {
-  count = var.create_tgw_route_table && var.attach_to_vpc ? 1 : 0
+  count = var.create_tgw_route_table && (var.attach_to_vpc || var.add_tgw_route_table_propagation) ? 1 : 0
 
-  transit_gateway_attachment_id = aws_ec2_transit_gateway_vpc_attachment.this[0].id
+  transit_gateway_attachment_id = local.tgw_attachment_id
 
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.this[0].id
 
