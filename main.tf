@@ -3,6 +3,8 @@ locals {
   tgw_arn = element(concat(aws_ec2_transit_gateway.this.*.arn, [var.tgw_arn]), 0)
 
   tgw_attachment_id = element(concat(aws_ec2_transit_gateway_vpc_attachment.this.*.id, [var.tgw_attachment_id]), 0)
+
+  tgw_route_rtb = element(concat(aws_ec2_transit_gateway_route_table.this.*.id, [var.alt_tgw_route_table_id]), 0)
 }
 
 resource "aws_ec2_transit_gateway" "this" {
@@ -44,7 +46,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 resource "aws_ec2_transit_gateway_route_table_association" "this" {
   count = var.create_tgw_route_table && (var.attach_to_vpc || var.add_tgw_route_table_association) ? 1 : 0
 
-  transit_gateway_attachment_id  = local.tgw_attachment_id
+  transit_gateway_attachment_id = local.tgw_attachment_id
 
   transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.this[0].id
 
@@ -67,7 +69,7 @@ resource "aws_ec2_transit_gateway_route_table_association" "this_cross_account" 
   provider = aws.tgw_rt_owner
 
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.this[0].id
-  transit_gateway_route_table_id = var.cross_account_tgw_route_table_id
+  transit_gateway_route_table_id = var.alt_tgw_route_table_id
 }
 
 resource "aws_ec2_transit_gateway_route_table_propagation" "this_cross_account" {
@@ -76,15 +78,15 @@ resource "aws_ec2_transit_gateway_route_table_propagation" "this_cross_account" 
   provider = aws.tgw_rt_owner
 
   transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.this[0].id
-  transit_gateway_route_table_id = var.cross_account_tgw_route_table_id
+  transit_gateway_route_table_id = var.alt_tgw_route_table_id
 }
 
 resource "aws_ec2_transit_gateway_route" "this" {
-  count = var.create_tgw && var.attach_to_vpc ? length(var.tgw_route) : 0
+  count = var.create_tgw_routes ? length(var.tgw_route) : 0
 
   destination_cidr_block         = var.tgw_route[count.index]
-  transit_gateway_attachment_id  = aws_ec2_transit_gateway_vpc_attachment.this[0].id
-  transit_gateway_route_table_id = aws_ec2_transit_gateway_route_table.this[0].id
+  transit_gateway_attachment_id  = local.tgw_attachment_id
+  transit_gateway_route_table_id = local.tgw_route_rtb
 }
 
 resource "aws_ram_resource_share" "this" {

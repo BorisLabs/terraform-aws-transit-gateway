@@ -130,21 +130,26 @@ variable "use_cross_account_tgw_route_table" {
   default     = false
 }
 
-variable "cross_account_tgw_route_table_id" {
-  description = "ID of TGW Route Table cross account."
+variable "alt_tgw_route_table_id" {
+  description = "ID of TGW Route Table cross account. Also used as RTB to add routes to."
   default     = ""
 }
 
 variable "add_tgw_route_table_association" {
   description = "Whether to associate TGW Route Table with an attachment"
-  default = ""
+  default     = ""
 }
 variable "add_tgw_route_table_propagation" {
   description = "Whether to associate TGW Route Table with an attachment"
-  default = ""
+  default     = ""
 }
 
 variable "tgw_attachment_id" {
   description = "ID of TGW Attachment to associate or propagate with Route Table"
-  default = ""
+  default     = ""
+}
+
+variable "create_tgw_routes" {
+  description = "Whether to create tgw routes."
+  default     = false
 }
