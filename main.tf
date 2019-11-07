@@ -44,7 +44,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 }
 
 resource "aws_ec2_transit_gateway_route_table_association" "this" {
-  count = var.create_tgw_route_table && (var.attach_to_vpc || var.add_tgw_route_table_association) ? 1 : 0
+  count = var.create_tgw_route_table && var.add_tgw_route_table_association ? 1 : 0
 
   transit_gateway_attachment_id = local.tgw_attachment_id
 
@@ -54,7 +54,7 @@ resource "aws_ec2_transit_gateway_route_table_association" "this" {
 }
 
 resource "aws_ec2_transit_gateway_route_table_propagation" "this" {
-  count = var.create_tgw_route_table && (var.attach_to_vpc || var.add_tgw_route_table_propagation) ? 1 : 0
+  count = var.create_tgw_route_table &&  var.add_tgw_route_table_propagation ? 1 : 0
 
   transit_gateway_attachment_id = local.tgw_attachment_id
 
@@ -64,7 +64,7 @@ resource "aws_ec2_transit_gateway_route_table_propagation" "this" {
 }
 
 resource "aws_ec2_transit_gateway_route_table_association" "this_cross_account" {
-  count = var.attach_to_vpc && !var.create_tgw_route_table && var.use_cross_account_tgw_route_table ? 1 : 0
+  count = var.attach_to_vpc && !var.create_tgw_route_table && var.use_cross_account_tgw_route_table && var.add_tgw_route_table_association ? 1 : 0
 
   provider = aws.tgw_rt_owner
 
@@ -73,7 +73,7 @@ resource "aws_ec2_transit_gateway_route_table_association" "this_cross_account" 
 }
 
 resource "aws_ec2_transit_gateway_route_table_propagation" "this_cross_account" {
-  count = var.attach_to_vpc && !var.create_tgw_route_table && var.use_cross_account_tgw_route_table ? 1 : 0
+  count = var.attach_to_vpc && !var.create_tgw_route_table && var.use_cross_account_tgw_route_table && var.add_tgw_route_table_propagation ? 1 : 0
 
   provider = aws.tgw_rt_owner
 
