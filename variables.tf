@@ -137,11 +137,11 @@ variable "alt_tgw_route_table_id" {
 
 variable "add_tgw_route_table_association" {
   description = "Whether to associate TGW Route Table with an attachment"
-  default     = ""
+  default     = false
 }
 variable "add_tgw_route_table_propagation" {
   description = "Whether to associate TGW Route Table with an attachment"
-  default     = ""
+  default     = false
 }
 
 variable "tgw_attachment_id" {
