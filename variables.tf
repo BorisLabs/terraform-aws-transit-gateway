@@ -119,3 +119,37 @@ variable "tgw_route_table_propagation" {
   description = "TGW Default Route properation"
   default     = false
 }
+
+variable "create_tgw_route_table" {
+  description = "Whether to create a route table associated with TGW"
+  default     = false
+}
+
+variable "use_cross_account_tgw_route_table" {
+  description = "Whether to associate Transit Gateawy Route Table in different account with the VPC Attachment created here"
+  default     = false
+}
+
+variable "alt_tgw_route_table_id" {
+  description = "ID of TGW Route Table cross account. Also used as RTB to add routes to."
+  default     = ""
+}
+
+variable "add_tgw_route_table_association" {
+  description = "Whether to associate TGW Route Table with an attachment"
+  default     = false
+}
+variable "add_tgw_route_table_propagation" {
+  description = "Whether to associate TGW Route Table with an attachment"
+  default     = false
+}
+
+variable "tgw_attachment_id" {
+  description = "ID of TGW Attachment to associate or propagate with Route Table"
+  default     = ""
+}
+
+variable "create_tgw_routes" {
+  description = "Whether to create tgw routes."
+  default     = false
+}

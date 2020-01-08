@@ -32,7 +32,8 @@ module "transit" {
   tgw_route_table_propagation = false
 
   providers = {
-    aws.share = aws.target-account
+    aws = aws
+    aws.tgw_rt_owner  = aws.target-account
   }
 }
 
