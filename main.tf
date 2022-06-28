@@ -41,6 +41,8 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
 
   transit_gateway_default_route_table_association = var.tgw_route_table_association
   transit_gateway_default_route_table_propagation = var.tgw_route_table_propagation
+
+  tags = merge(var.default_tags, var.tgw_tags)
 }
 
 resource "aws_ec2_transit_gateway_route_table_association" "this" {
@@ -111,4 +113,3 @@ resource "aws_ram_principal_association" "this" {
   principal          = data.aws_caller_identity.this.account_id
   resource_share_arn = aws_ram_resource_share.this[0].arn
 }
-
