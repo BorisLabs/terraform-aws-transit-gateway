@@ -91,6 +91,14 @@ resource "aws_ec2_transit_gateway_route" "this" {
   transit_gateway_route_table_id = local.tgw_route_rtb
 }
 
+resource "aws_ec2_transit_gateway_prefix_list_reference" "this" {
+  count = var.create_tgw_routes ? length(var.tgw_prefix_list) : 0
+
+  prefix_list_id                 = var.tgw_prefix_list[count.index]
+  transit_gateway_attachment_id  = local.tgw_attachment_id
+  transit_gateway_route_table_id = local.tgw_route_rtb
+}
+
 resource "aws_ram_resource_share" "this" {
   count = var.share_tgw ? 1 : 0
 
