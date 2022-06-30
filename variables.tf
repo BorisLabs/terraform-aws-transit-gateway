@@ -153,3 +153,9 @@ variable "create_tgw_routes" {
   description = "Whether to create tgw routes."
   default     = false
 }
+
+variable "tgw_prefix_list" {
+  description = "Prefix lists to add to TGW route table"
+  type        = list(string)
+  default     = []
+}
