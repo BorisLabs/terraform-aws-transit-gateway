@@ -6,8 +6,11 @@ data "aws_vpc" "default" {
   id      = var.vpc_id
 }
 
-data "aws_subnet_ids" "subnets" {
-  count  = var.vpc_id == "" ? 1 : 0
-  vpc_id = data.aws_vpc.default.id
-}
+data "aws_subnets" "subnets" {
+  count = var.vpc_id == "" ? 1 : 0
 
+  filter {
+    name   = "vpc-id"
+    values = [data.aws_vpc.default.id]
+  }
+}
