@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+## [1.0.1](https://github.com/BorisLabs/terraform-aws-transit-gateway/compare/v1.0.0...v1.0.1) (2023-06-27)
+
+
+### Bug Fixes
+
+* Replace deprecated aws_subnet_ids resource for aws_subnets ([fdd4b8c](https://github.com/BorisLabs/terraform-aws-transit-gateway/commit/fdd4b8cf47191f0fb8c2009e7891085af6ac7e29))
+
 # [1.0.0](https://github.com/BorisLabs/terraform-aws-transit-gateway/compare/v0.0.1...v1.0.0) (2023-06-07)
 
 
