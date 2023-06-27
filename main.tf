@@ -35,7 +35,7 @@ resource "aws_ec2_transit_gateway_vpc_attachment" "this" {
   count = var.attach_to_vpc ? 1 : 0
 
   vpc_id     = var.vpc_id != "" ? var.vpc_id : data.aws_vpc.default.id
-  subnet_ids = var.vpc_id != "" ?  var.subnet_ids : data.aws_subnet_ids.subnets.*[0].ids
+  subnet_ids = var.vpc_id != "" ?  var.subnet_ids : data.aws_subnets.subnets.*[0].ids
 
   transit_gateway_id = local.tgw_id
 
