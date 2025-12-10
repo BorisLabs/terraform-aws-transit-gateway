@@ -149,6 +149,12 @@ variable "tgw_attachment_id" {
   default     = ""
 }
 
+variable "tgw_attachment_ids" {
+  description = "List of TGW Attachment IDs to associate or propagate with Route Table"
+  type        = list(string)
+  default     = []
+}
+
 variable "create_tgw_routes" {
   description = "Whether to create tgw routes."
   default     = false
