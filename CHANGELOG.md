@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+# [1.1.0](https://github.com/BorisLabs/terraform-aws-transit-gateway/compare/v1.0.1...v1.1.0) (2025-12-10)
+
+
+### Features
+
+* add support for multiple TGW attachment IDs in route table operations ([6a3a731](https://github.com/BorisLabs/terraform-aws-transit-gateway/commit/6a3a73125f00593df8c6804d5dc5503b15b76f5d))
+
 ## [1.0.1](https://github.com/BorisLabs/terraform-aws-transit-gateway/compare/v1.0.0...v1.0.1) (2023-06-27)
 
 
