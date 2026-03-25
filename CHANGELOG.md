@@ -1,5 +1,12 @@
 All notable changes to this terraform will be documented in this file.
 
+## [1.1.1](https://github.com/BorisLabs/terraform-aws-transit-gateway/compare/v1.1.0...v1.1.1) (2026-03-25)
+
+
+### Bug Fixes
+
+* Loosen AWS provider requirement to allow newer versions ([ae09e14](https://github.com/BorisLabs/terraform-aws-transit-gateway/commit/ae09e14578ff0e39db8b69e68b9eb2eff6677572))
+
 # [1.1.0](https://github.com/BorisLabs/terraform-aws-transit-gateway/compare/v1.0.1...v1.1.0) (2025-12-10)
 
 
